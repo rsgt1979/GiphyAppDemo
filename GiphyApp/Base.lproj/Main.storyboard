@@ -26,11 +26,11 @@
             </objects>
             <point key="canvasLocation" x="-438" y="168"/>
         </scene>
-        <!--Overviewer Collection View Controller-->
+        <!--Giphy App-->
         <scene sceneID="3gb-r6-RIc">
             <objects>
                 <collectionViewController id="LDD-4Y-vSg" customClass="OverviewerCollectionViewController" customModule="GiphyApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="nrY-Jc-i95">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="nrY-Jc-i95">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,6 +54,7 @@
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewHeader" id="wIl-BM-QPR" customClass="SearchCollectionReusableView" customModule="GiphyApp" customModuleProvider="target">
@@ -64,15 +65,21 @@
                                     <rect key="frame" x="0.0" y="-3" width="375" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="LDD-4Y-vSg" id="MHr-q1-llg"/>
+                                    </connections>
                                 </searchBar>
                             </subviews>
+                            <connections>
+                                <outlet property="searchBar" destination="o4o-TA-7AN" id="3qe-Gg-uFY"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="LDD-4Y-vSg" id="6LF-mn-v9S"/>
                             <outlet property="delegate" destination="LDD-4Y-vSg" id="l3k-5B-ILD"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="t9c-r6-yNc"/>
+                    <navigationItem key="navigationItem" title="Giphy App" id="t9c-r6-yNc"/>
                     <connections>
                         <segue destination="WB8-TW-hbn" kind="show" identifier="showViewer" id="UPH-hB-714"/>
                     </connections>

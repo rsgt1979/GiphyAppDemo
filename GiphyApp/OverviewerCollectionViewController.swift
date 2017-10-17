@@ -43,13 +43,13 @@ class OverviewerCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 10
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,6 +58,16 @@ class OverviewerCollectionViewController: UICollectionViewController {
         // Configure the cell
     
         return cell
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
+      //  if let searchHeader = header as? SearchCollectionReusableView {
+       //     searchHeader.searchBar.sizeToFit()
+     //   }
+
+        return header
     }
 
     // MARK: UICollectionViewDelegate
@@ -91,4 +101,28 @@ class OverviewerCollectionViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension OverviewerCollectionViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text
+        navigationItem.title = searchText
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        let escapedSearchString = searchText?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        let apiKey = "6bvQw6LPIbPLg7Ahw8Gup28fiZf66A14"
+        let urlString = "http://api.giphy.com/v1/gifs/search?q=\(escapedSearchString)&api_key=\(apiKey)"
+        
+//        let fullURL = URL(string: urlString)
+//        let sessionconfigutation = URLSessionConfiguration.default
+//        let session = URLSession(configuration: sessionconfigutation)
+//
+//        let request = URLRequest(url: fullURL!)
+        
+        
+        
+        
+    }
+    
 }
