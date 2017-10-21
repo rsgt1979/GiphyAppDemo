@@ -10,6 +10,13 @@ import Foundation
 
 typealias JSONTask = URLSessionDataTask
 typealias JSONCompletionHandler = ([String: AnyObject]?, HTTPURLResponse?, Error?) -> Void
+
+protocol FinalURL {
+    var baseURL: URL { get }
+    var path: String { get }
+    var request: URLRequest { get }
+}
+
 enum APIResult<T> {
     case Success(T)
     case Failute(Error)
@@ -20,9 +27,7 @@ protocol APIManager {
     var session: URLSession { get }
     func JSONTaskWith(request: URLRequest, completionHandler: JSONCompletionHandler) -> JSONTask
     func fetch<T>(request: URLRequest, parse: ([String: AnyObject]) -> T?, completionHandler: (APIResult<T>) -> Void)
-    init(sessionConfiguration: URLSessionConfiguration)
 }
-
 
 extension APIManager {
     func JSONTaskWith(request: URLRequest, completionHandler: @escaping JSONCompletionHandler) -> JSONTask {
@@ -56,13 +61,22 @@ extension APIManager {
         return dataTask
     }
     
-    
     func fetch<T>(request: URLRequest, parse: ([String: AnyObject]) -> T?, completionHandler: (APIResult<T>) -> Void) {
         
+        let dataTask = JSONTaskWith(request: request) { (json, response, error) in
+            guard let json = json else {
+                if let error = error {
+                    completionHandler(APIResult.Failute(error))
+                }
+                return
+            }
+            if let value = parse(json) {
+                completionHandler(APIResult.Success(value))
+            } else {
+                let error = NSError(domain: GiphyNetworkingErrorDomain, code: 200, userInfo: nil)
+                completionHandler(APIResult.Failute(error))
+            }
+        }
+        dataTask.resume()
     }
-    
-    
-    
-    
-    
 }

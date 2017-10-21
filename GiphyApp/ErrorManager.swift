@@ -10,3 +10,4 @@ import Foundation
 
 public let GiphyNetworkingErrorDomain = "com.gishtimulat.GiphyApp"
 public let MissingHTTPResponseError = 100
+public let UxexpectedResponseError = 200

@@ -111,6 +111,8 @@ extension OverviewerCollectionViewController: UISearchBarDelegate {
         searchBar.text = ""
         searchBar.endEditing(true)
         let escapedSearchString = searchText?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
+        
+        
         let apiKey = "6bvQw6LPIbPLg7Ahw8Gup28fiZf66A14"
         let urlString = "http://api.giphy.com/v1/gifs/search?q=\(escapedSearchString)&api_key=\(apiKey)"
         
